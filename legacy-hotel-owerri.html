@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legacy Hotel — Owerri</title>
+<meta name="description" content="Legacy Hotel, Owerri — a heritage of hospitality in the heart of Imo State.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&family=Spectral:ital@1&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#1A1410;
+    --ivory:#F5EFE6;
+    --bronze:#A8763E;
+    --bronze-bright:#C99354;
+    --clay:#5C3A2E;
+    --palm:#2E3B2F;
+    --line: rgba(245,239,230,0.16);
+    --max: 1240px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--ink);
+    color:var(--ivory);
+    font-family:'Inter', sans-serif;
+    font-weight:300;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+    line-height:1.08;
+  }
+
+  .eyebrow{
+    font-family:'Spectral', serif;
+    font-style:italic;
+    font-size:0.82rem;
+    letter-spacing:0.06em;
+    color:var(--bronze-bright);
+    display:flex;
+    align-items:center;
+    gap:0.6rem;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;
+    height:1px;
+    background:var(--bronze-bright);
+    display:inline-block;
+  }
+
+  a{color:inherit;text-decoration:none;}
+  img{display:block;width:100%;height:100%;object-fit:cover;}
+
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 6vw;}
+
+  /* reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  /* ===== NAV ===== */
+  header{
+    position:fixed; top:0; left:0; right:0;
+    z-index:100;
+    padding:1.6rem 0 1.2rem;
+    transition: background 0.4s ease, padding 0.4s ease, border-color 0.4s ease;
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{
+    background:rgba(20,16,12,0.92);
+    backdrop-filter:blur(10px);
+    padding:1rem 0;
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-mark{
+    font-family:'Fraunces', serif;
+    font-size:1.35rem;
+    letter-spacing:0.02em;
+  }
+  .nav-mark em{ color:var(--bronze-bright); font-style:normal; }
+  nav ul{
+    display:flex; gap:2.4rem; list-style:none;
+  }
+  nav ul li a{
+    font-size:0.86rem;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color:var(--ivory);
+    opacity:0.82;
+    position:relative;
+    padding-bottom:6px;
+  }
+  nav ul li a:hover{ opacity:1; }
+  nav ul li a::after{
+    content:"";
+    position:absolute; left:0; bottom:0;
+    width:0%; height:1px;
+    background:var(--bronze-bright);
+    transition:width 0.3s ease;
+  }
+  nav ul li a:hover::after{ width:100%; }
+
+  .nav-cta{
+    border:1px solid var(--bronze);
+    padding:0.6rem 1.4rem;
+    font-size:0.8rem;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .nav-cta:hover{ background:var(--bronze); color:var(--ink); }
+
+  .nav-toggle{ display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; }
+  .nav-toggle span{ width:24px; height:1px; background:var(--ivory); display:block; }
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    padding-bottom:5rem;
+  }
+  .hero-bg{
+    position:absolute; inset:0; z-index:-2;
+  }
+  .hero-bg img{
+    width:100%; height:100%; object-fit:cover;
+    filter: saturate(0.85) brightness(0.55);
+  }
+  .hero-bg::after{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(20,16,12,0.55) 0%, rgba(20,16,12,0.35) 35%, rgba(20,16,12,0.96) 100%);
+  }
+
+  .hero-inner{ position:relative; z-index:1; }
+
+  .hero-top-line{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    margin-bottom:1.6rem;
+  }
+  .hero-loc{
+    font-family:'Spectral', serif; font-style:italic;
+    font-size:0.95rem; color:var(--bronze-bright);
+  }
+
+  .hero h1{
+    font-size:clamp(3.2rem, 9vw, 7.2rem);
+    color:var(--ivory);
+    opacity:0;
+    transform:translateY(24px);
+    animation: riseIn 1s ease forwards;
+    animation-delay:0.15s;
+  }
+  .hero h1 span{ display:block; }
+  .hero h1 .gold{ color:var(--bronze-bright); font-style:italic; font-weight:400; }
+
+  .hero-sub{
+    max-width:520px;
+    margin-top:1.6rem;
+    font-size:1.02rem;
+    color:rgba(245,239,230,0.78);
+    opacity:0;
+    transform:translateY(20px);
+    animation: riseIn 1s ease forwards;
+    animation-delay:0.45s;
+  }
+
+  .hero-actions{
+    margin-top:2.6rem;
+    display:flex; gap:1.2rem; flex-wrap:wrap;
+    opacity:0;
+    transform:translateY(20px);
+    animation: riseIn 1s ease forwards;
+    animation-delay:0.65s;
+  }
+
+  .btn-primary{
+    background:var(--bronze-bright);
+    color:var(--ink);
+    padding:0.95rem 2.1rem;
+    font-size:0.85rem;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+  .btn-primary:hover{ background:var(--ivory); transform:translateY(-2px); }
+
+  .btn-ghost{
+    border:1px solid rgba(245,239,230,0.4);
+    padding:0.95rem 2.1rem;
+    font-size:0.85rem;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+  .btn-ghost:hover{ border-color:var(--ivory); background:rgba(245,239,230,0.06); }
+
+  @keyframes riseIn{ to{ opacity:1; transform:translateY(0); } }
+
+  .scroll-cue{
+    position:absolute; bottom:2.2rem; left:6vw;
+    display:flex; align-items:center; gap:0.7rem;
+    font-size:0.74rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:rgba(245,239,230,0.6);
+  }
+  .scroll-cue .line{
+    width:1px; height:34px; background:rgba(245,239,230,0.4);
+    position:relative; overflow:hidden;
+  }
+  .scroll-cue .line::after{
+    content:""; position:absolute; top:-100%; left:0; width:100%; height:100%;
+    background:var(--bronze-bright);
+    animation: scrollPulse 2.2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse{
+    0%{ top:-100%; } 50%{ top:0%; } 100%{ top:100%; }
+  }
+
+  /* ===== LEDGER DIVIDER (signature motif) ===== */
+  .ledger{
+    display:flex; align-items:center; gap:1.2rem;
+    padding:3.4rem 0 0;
+  }
+  .ledger .num{
+    font-family:'Fraunces', serif; font-style:italic;
+    font-size:1rem; color:var(--bronze);
+  }
+  .ledger .rule{ flex:1; height:1px; background:var(--line); }
+
+  /* ===== SECTION GENERIC ===== */
+  section{ position:relative; padding:2.4rem 0 7rem; }
+  .section-head{ margin-bottom:3.2rem; max-width:640px; }
+  .section-head h2{ font-size:clamp(2.1rem, 4vw, 3rem); margin-top:0.9rem; }
+  .section-head p{ margin-top:1.1rem; color:rgba(245,239,230,0.7); font-size:1.02rem; max-width:540px; }
+
+  /* ===== INTRO / ABOUT ===== */
+  .about-grid{
+    display:grid; grid-template-columns: 1fr 1fr; gap:4.5rem; align-items:center;
+  }
+  .about-figure{
+    position:relative;
+    aspect-ratio: 4/5;
+    overflow:hidden;
+  }
+  .about-figure img{ width:100%; height:100%; }
+  .about-figure .tag{
+    position:absolute; bottom:1.2rem; left:1.2rem;
+    background:rgba(20,16,12,0.78);
+    border:1px solid var(--line);
+    padding:0.7rem 1.1rem;
+    font-family:'Spectral', serif; font-style:italic;
+    font-size:0.85rem;
+  }
+  .about-copy p{ color:rgba(245,239,230,0.78); margin-top:1.1rem; }
+  .about-copy p:first-of-type{ margin-top:1.4rem; }
+
+  .stat-row{
+    display:flex; gap:2.6rem; margin-top:2.6rem; flex-wrap:wrap;
+  }
+  .stat-row div{ border-left:1px solid var(--bronze); padding-left:1rem; }
+  .stat-row .n{ font-family:'Fraunces', serif; font-size:2rem; color:var(--bronze-bright); }
+  .stat-row .l{ font-size:0.78rem; letter-spacing:0.04em; text-transform:uppercase; color:rgba(245,239,230,0.6); margin-top:0.2rem; }
+
+  /* ===== ROOM LEDGER (horizontal scroll) ===== */
+  .rooms-scroll{
+    display:flex; gap:1.6rem; overflow-x:auto; padding-bottom:1.4rem;
+    scroll-snap-type:x mandatory;
+    -ms-overflow-style:none; scrollbar-width:none;
+  }
+  .rooms-scroll::-webkit-scrollbar{ display:none; }
+
+  .room-card{
+    flex:0 0 340px; scroll-snap-align:start;
+    border:1px solid var(--line);
+    background:rgba(245,239,230,0.02);
+  }
+  .room-figure{ aspect-ratio:4/3; overflow:hidden; position:relative; }
+  .room-figure img{ transition: transform 0.6s ease; }
+  .room-card:hover .room-figure img{ transform:scale(1.06); }
+
+  .room-body{ padding:1.6rem; }
+  .room-eyebrow{
+    display:flex; justify-content:space-between; align-items:baseline;
+    font-family:'Fraunces', serif; font-style:italic;
+    font-size:0.85rem; color:var(--bronze-bright); margin-bottom:0.5rem;
+  }
+  .room-body h3{ font-size:1.4rem; }
+  .room-body p{ font-size:0.92rem; color:rgba(245,239,230,0.68); margin-top:0.6rem; }
+  .room-price{
+    margin-top:1.2rem; padding-top:1.2rem; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .room-price .amount{ font-family:'Fraunces', serif; font-size:1.2rem; color:var(--ivory); }
+  .room-price .amount span{ font-size:0.74rem; color:rgba(245,239,230,0.55); font-family:'Inter',sans-serif; }
+  .room-price a{ font-size:0.78rem; letter-spacing:0.04em; text-transform:uppercase; color:var(--bronze-bright); border-bottom:1px solid var(--bronze-bright); padding-bottom:2px; }
+
+  .rooms-hint{ font-size:0.78rem; color:rgba(245,239,230,0.45); margin-top:0.6rem; letter-spacing:0.03em; }
+
+  /* ===== AMENITIES ===== */
+  .amenity-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .amenity{
+    background:var(--ink);
+    padding:2.6rem 2rem;
+    transition: background 0.35s ease;
+  }
+  .amenity:hover{ background:rgba(168,118,62,0.08); }
+  .amenity .glyph{
+    width:40px; height:40px;
+    margin-bottom:1.4rem;
+    color:var(--bronze-bright);
+  }
+  .amenity h3{ font-size:1.15rem; margin-bottom:0.5rem; }
+  .amenity p{ font-size:0.88rem; color:rgba(245,239,230,0.62); }
+
+  /* ===== GALLERY STRIP ===== */
+  .gallery-strip{
+    display:grid; grid-template-columns: 1.3fr 1fr 1fr; gap:1rem; height:520px;
+  }
+  .gallery-strip .g1{ grid-row:1 / 3; }
+  .gallery-strip figure{ overflow:hidden; position:relative; height:100%; }
+  .gallery-strip figure img{ transition:transform 0.7s ease; }
+  .gallery-strip figure:hover img{ transform:scale(1.05); }
+
+  /* ===== TESTIMONY ===== */
+  .testimony{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:5rem 0;
+    text-align:center;
+  }
+  .testimony blockquote{
+    font-family:'Fraunces', serif;
+    font-size:clamp(1.5rem, 3vw, 2.3rem);
+    font-weight:400;
+    font-style:italic;
+    max-width:760px;
+    margin:0 auto;
+    color:var(--ivory);
+  }
+  .testimony cite{
+    display:block; margin-top:1.6rem;
+    font-family:'Inter',sans-serif; font-style:normal;
+    font-size:0.82rem; letter-spacing:0.05em; text-transform:uppercase;
+    color:var(--bronze-bright);
+  }
+
+  /* ===== BOOK / CONTACT ===== */
+  .book-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:4.5rem;
+  }
+  .book-info p{ color:rgba(245,239,230,0.72); margin-top:1rem; max-width:420px; }
+  .info-line{
+    display:flex; gap:1rem; margin-top:1.6rem;
+    padding-top:1.2rem; border-top:1px solid var(--line);
+    font-size:0.92rem;
+  }
+  .info-line .k{ color:rgba(245,239,230,0.5); min-width:90px; font-size:0.78rem; letter-spacing:0.04em; text-transform:uppercase; padding-top:2px; }
+
+  form{ display:flex; flex-direction:column; gap:1.3rem; }
+  .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:1.3rem; }
+  label{
+    font-size:0.74rem; letter-spacing:0.05em; text-transform:uppercase;
+    color:rgba(245,239,230,0.55); margin-bottom:0.5rem; display:block;
+  }
+  input, select{
+    width:100%;
+    background:transparent;
+    border:none;
+    border-bottom:1px solid var(--line);
+    color:var(--ivory);
+    font-family:'Inter', sans-serif;
+    font-size:0.95rem;
+    padding:0.6rem 0;
+    transition:border-color 0.3s ease;
+  }
+  input::placeholder{ color:rgba(245,239,230,0.32); }
+  input:focus, select:focus{
+    outline:none;
+    border-color:var(--bronze-bright);
+  }
+  select option{ background:var(--ink); color:var(--ivory); }
+
+  .submit-btn{
+    margin-top:0.6rem;
+    align-self:flex-start;
+    background:var(--bronze-bright);
+    color:var(--ink);
+    border:none;
+    padding:1rem 2.4rem;
+    font-size:0.85rem;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    font-family:'Inter', sans-serif;
+  }
+  .submit-btn:hover{ background:var(--ivory); transform:translateY(-2px); }
+
+  /* focus visibility everywhere */
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible{
+    outline:2px solid var(--bronze-bright);
+    outline-offset:3px;
+  }
+
+  /* ===== FOOTER ===== */
+  footer{
+    border-top:1px solid var(--line);
+    padding:3.4rem 0 2.4rem;
+  }
+  .footer-top{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    flex-wrap:wrap; gap:2rem;
+    padding-bottom:2.4rem;
+  }
+  .footer-mark{ font-family:'Fraunces', serif; font-size:1.5rem; }
+  .footer-mark em{ color:var(--bronze-bright); font-style:normal; }
+  .footer-cols{ display:flex; gap:4rem; flex-wrap:wrap; }
+  .footer-col h4{
+    font-family:'Inter', sans-serif; font-size:0.76rem; letter-spacing:0.06em;
+    text-transform:uppercase; color:rgba(245,239,230,0.5); margin-bottom:0.9rem; font-weight:500;
+  }
+  .footer-col a, .footer-col p{
+    display:block; font-size:0.9rem; color:rgba(245,239,230,0.78);
+    margin-bottom:0.6rem;
+  }
+  .footer-col a:hover{ color:var(--bronze-bright); }
+  .footer-bottom{
+    display:flex; justify-content:space-between; align-items:center;
+    border-top:1px solid var(--line); padding-top:1.6rem;
+    font-size:0.78rem; color:rgba(245,239,230,0.45);
+    flex-wrap:wrap; gap:1rem;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 980px){
+    .about-grid, .book-grid{ grid-template-columns:1fr; gap:2.6rem; }
+    .amenity-grid{ grid-template-columns:1fr 1fr; }
+    .gallery-strip{ grid-template-columns:1fr 1fr; height:auto; }
+    .gallery-strip .g1{ grid-row:auto; grid-column:span 2; height:280px; }
+    .gallery-strip figure{ height:220px; }
+    .field-row{ grid-template-columns:1fr; }
+  }
+
+  @media (max-width: 760px){
+    nav ul, .nav-cta{ display:none; }
+    .nav-toggle{ display:flex; }
+    .amenity-grid{ grid-template-columns:1fr; }
+    .stat-row{ gap:1.6rem; }
+    .footer-top{ flex-direction:column; }
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="wrap nav-row">
+    <a href="#top" class="nav-mark">LEGACY <em>HOTEL</em></a>
+    <nav>
+      <ul>
+        <li><a href="#about">The Hotel</a></li>
+        <li><a href="#rooms">Rooms &amp; Suites</a></li>
+        <li><a href="#amenities">Amenities</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#book">Reserve</a></li>
+      </ul>
+    </nav>
+    <a href="#book" class="nav-cta">Book a Stay</a>
+    <button class="nav-toggle" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" style="padding-top:0;">
+    <div class="hero-bg">
+      <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1800&auto=format&fit=crop" alt="Legacy Hotel facade at dusk, Owerri">
+    </div>
+    <div class="wrap hero-inner">
+      <div class="hero-top-line">
+        <span class="hero-loc">Owerri, Imo State · Est. 1996</span>
+      </div>
+      <h1><span>A Legacy</span><span class="gold">Worth Returning To</span></h1>
+      <p class="hero-sub">Set among the palms of Owerri, Legacy Hotel has welcomed three decades of travellers, families, and statesmen with quiet luxury, warm Imo hospitality, and rooms built to be remembered.</p>
+      <div class="hero-actions">
+        <a href="#book" class="btn-primary">Reserve Your Room</a>
+        <a href="#rooms" class="btn-ghost">View Rooms &amp; Suites</a>
+      </div>
+    </div>
+    <div class="scroll-cue"><span class="line"></span> Scroll</div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="ledger"><span class="num">I.</span><span class="rule"></span></div>
+      <div class="about-grid" style="margin-top:2.6rem;">
+        <div class="about-figure">
+          <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=1200&auto=format&fit=crop" alt="Legacy Hotel lobby interior">
+          <div class="tag">The lobby, est. 1996</div>
+        </div>
+        <div class="about-copy">
+          <p class="eyebrow">Our Story</p>
+          <h2>Three Decades of Hospitality in the Heartland</h2>
+          <p>Legacy Hotel opened its doors on Aba Road in 1996, the first of its kind to bring international standards of comfort to Owerri. What began as a single wing of twenty rooms has grown into one of Imo State's most trusted addresses for business, celebration, and rest.</p>
+          <p>Every detail, from the carved mahogany reception desk to the courtyard gardens, is maintained as it was built: by hand, with patience, and with the next generation of guests in mind.</p>
+          <div class="stat-row">
+            <div><div class="n">30+</div><div class="l">Years Operating</div></div>
+            <div><div class="n">86</div><div class="l">Rooms &amp; Suites</div></div>
+            <div><div class="n">4</div><div class="l">Dining &amp; Event Spaces</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROOMS -->
+  <section id="rooms">
+    <div class="wrap">
+      <div class="ledger"><span class="num">II.</span><span class="rule"></span></div>
+      <div class="section-head" style="margin-top:2.6rem;">
+        <p class="eyebrow">Rooms &amp; Suites</p>
+        <h2>Stay, As You Prefer To</h2>
+        <p>From the Classic Room to the Legacy Suite, every category is appointed with locally-made furnishings, fibre-fast Wi-Fi, and air conditioning built for the Owerri climate.</p>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="rooms-scroll">
+
+        <article class="room-card">
+          <div class="room-figure"><img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=900&auto=format&fit=crop" alt="Classic Room"></div>
+          <div class="room-body">
+            <div class="room-eyebrow"><span>Classic Room</span><span>28m²</span></div>
+            <h3>The Classic</h3>
+            <p>A queen bed, writing desk, and garden-facing window — built for the single traveller or short business stay.</p>
+            <div class="room-price">
+              <div class="amount">₦45,000 <span>/ night</span></div>
+              <a href="#book">Select</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="room-card">
+          <div class="room-figure"><img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=900&auto=format&fit=crop" alt="Deluxe Room"></div>
+          <div class="room-body">
+            <div class="room-eyebrow"><span>Deluxe Room</span><span>36m²</span></div>
+            <h3>The Deluxe</h3>
+            <p>A king bed and a private sitting area, with a balcony overlooking the courtyard gardens.</p>
+            <div class="room-price">
+              <div class="amount">₦68,000 <span>/ night</span></div>
+              <a href="#book">Select</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="room-card">
+          <div class="room-figure"><img src="https://images.unsplash.com/photo-1591088398332-8a7791972843?q=80&w=900&auto=format&fit=crop" alt="Executive Suite"></div>
+          <div class="room-body">
+            <div class="room-eyebrow"><span>Executive Suite</span><span>52m²</span></div>
+            <h3>The Executive</h3>
+            <p>A separate living room, dining nook, and workspace — favoured by visiting executives and dignitaries.</p>
+            <div class="room-price">
+              <div class="amount">₦110,000 <span>/ night</span></div>
+              <a href="#book">Select</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="room-card">
+          <div class="room-figure"><img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=900&auto=format&fit=crop" alt="Legacy Suite"></div>
+          <div class="room-body">
+            <div class="room-eyebrow"><span>Legacy Suite</span><span>78m²</span></div>
+            <h3>The Legacy Suite</h3>
+            <p>Our signature suite: two bedrooms, a private lounge, and butler service for the occasion that calls for it.</p>
+            <div class="room-price">
+              <div class="amount">₦185,000 <span>/ night</span></div>
+              <a href="#book">Select</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+      <p class="rooms-hint">Scroll sideways to view all categories →</p>
+    </div>
+  </section>
+
+  <!-- AMENITIES -->
+  <section id="amenities">
+    <div class="wrap">
+      <div class="ledger"><span class="num">III.</span><span class="rule"></span></div>
+      <div class="section-head" style="margin-top:2.6rem;">
+        <p class="eyebrow">In-House</p>
+        <h2>Everything a Stay Requires</h2>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="amenity-grid">
+
+        <div class="amenity">
+          <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 18v-7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v7M2 18h20M5 11V8a2 2 0 0 1 2-2h2"/></svg>
+          <h3>Restaurant &amp; Lounge</h3>
+          <p>Continental and traditional Igbo dishes served from 6am to midnight, plus a rooftop lounge for evening drinks.</p>
+        </div>
+
+        <div class="amenity">
+          <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="6" width="18" height="13" rx="1"/><path d="M3 10h18M8 3v3M16 3v3"/></svg>
+          <h3>Event &amp; Conference Halls</h3>
+          <p>Three halls seating from 40 to 400 guests — fitted for weddings, conferences, and traditional ceremonies.</p>
+        </div>
+
+        <div class="amenity">
+          <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="9" r="3"/><path d="M5 21c0-4 3-6 7-6s7 2 7 6"/></svg>
+          <h3>Concierge Service</h3>
+          <p>Airport pickup, local tours, and 24-hour front desk support throughout your stay.</p>
+        </div>
+
+        <div class="amenity">
+          <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
+          <h3>Swimming Pool</h3>
+          <p>An open-air pool framed by palms, open daily from 6am to 9pm with poolside service.</p>
+        </div>
+
+        <div class="amenity">
+          <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 7h8M8 11h8M8 15h5"/></svg>
+          <h3>Business Centre</h3>
+          <p>Private workstations, fast Wi-Fi, and printing services for the travelling professional.</p>
+        </div>
+
+        <div class="amenity">
+          <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5 13l3-9h8l3 9M5 13a2 2 0 0 0-2 2v4h18v-4a2 2 0 0 0-2-2M5 13h14"/></svg>
+          <h3>Secure Parking</h3>
+          <p>Gated, attended parking for guests and visitors, with valet available on request.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="wrap">
+      <div class="ledger"><span class="num">IV.</span><span class="rule"></span></div>
+      <div class="section-head" style="margin-top:2.6rem;">
+        <p class="eyebrow">A Closer Look</p>
+        <h2>Around the Hotel</h2>
+      </div>
+      <div class="gallery-strip">
+        <figure class="g1"><img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?q=80&w=1000&auto=format&fit=crop" alt="Hotel courtyard garden"></figure>
+        <figure><img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=700&auto=format&fit=crop" alt="Hotel pool"></figure>
+        <figure><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=700&auto=format&fit=crop" alt="Hotel suite bedroom"></figure>
+        <figure><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=700&auto=format&fit=crop" alt="Restaurant dining"></figure>
+        <figure><img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=700&auto=format&fit=crop" alt="Hotel bathroom detail"></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONY -->
+  <section class="testimony" style="padding-top:0;">
+    <div class="wrap">
+      <blockquote>"My grandfather stayed here for his wedding reception in 1998. We held mine in the same hall, twenty-six years later. Some things in Owerri are worth keeping."</blockquote>
+      <cite>— Chidinma O., Returning Guest</cite>
+    </div>
+  </section>
+
+  <!-- BOOK -->
+  <section id="book">
+    <div class="wrap">
+      <div class="ledger"><span class="num">V.</span><span class="rule"></span></div>
+      <div class="book-grid" style="margin-top:2.6rem;">
+        <div class="book-info">
+          <p class="eyebrow">Reserve a Room</p>
+          <h2>Begin Your Stay</h2>
+          <p>Tell us your dates and we'll confirm availability within the hour. For groups, weddings, or conference bookings, call the front desk directly.</p>
+          <div class="info-line"><span class="k">Address</span><span>14 Aba Road, Owerri, Imo State, Nigeria</span></div>
+          <div class="info-line"><span class="k">Phone</span><span>+234 803 123 4567</span></div>
+          <div class="info-line"><span class="k">Email</span><span>reservations@legacyhotelowerri.com</span></div>
+          <div class="info-line"><span class="k">Front Desk</span><span>Open 24 hours, every day</span></div>
+        </div>
+        <form id="bookingForm">
+          <div class="field-row">
+            <div>
+              <label for="fname">Full Name</label>
+              <input type="text" id="fname" placeholder="Your name" required>
+            </div>
+            <div>
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" placeholder="080..." required>
+            </div>
+          </div>
+          <div class="field-row">
+            <div>
+              <label for="checkin">Check-in</label>
+              <input type="date" id="checkin" required>
+            </div>
+            <div>
+              <label for="checkout">Check-out</label>
+              <input type="date" id="checkout" required>
+            </div>
+          </div>
+          <div>
+            <label for="roomtype">Room Type</label>
+            <select id="roomtype">
+              <option>Classic Room</option>
+              <option>Deluxe Room</option>
+              <option>Executive Suite</option>
+              <option>Legacy Suite</option>
+            </select>
+          </div>
+          <button type="submit" class="submit-btn">Request Reservation</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="footer-mark">LEGACY <em>HOTEL</em></div>
+        <p style="color:rgba(245,239,230,0.5); font-size:0.85rem; margin-top:0.8rem; max-width:260px;">14 Aba Road, Owerri, Imo State, Nigeria. A legacy of hospitality since 1996.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a href="#about">The Hotel</a>
+          <a href="#rooms">Rooms &amp; Suites</a>
+          <a href="#amenities">Amenities</a>
+          <a href="#gallery">Gallery</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="tel:+2348031234567">+234 803 123 4567</a>
+          <a href="mailto:reservations@legacyhotelowerri.com">reservations@legacyhotelowerri.com</a>
+        </div>
+        <div class="footer-col">
+          <h4>Follow</h4>
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Legacy Hotel, Owerri. All rights reserved.</span>
+      <span>Built with care in Imo State.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // header scroll state
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // booking form (front-end only demo)
+  const form = document.getElementById('bookingForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const btn = form.querySelector('.submit-btn');
+    const original = btn.textContent;
+    btn.textContent = 'Request Sent ✓';
+    btn.style.background = '#2E3B2F';
+    btn.style.color = '#F5EFE6';
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.style.background = '';
+      btn.style.color = '';
+      form.reset();
+    }, 2800);
+  });
+
+  // mobile nav toggle (simple show/hide)
+  const toggle = document.querySelector('.nav-toggle');
+  const navUl = document.querySelector('nav ul');
+  const navCta = document.querySelector('.nav-cta');
+  toggle.addEventListener('click', () => {
+    const open = navUl.style.display === 'flex';
+    navUl.style.display = open ? 'none' : 'flex';
+    navCta.style.display = open ? 'none' : 'inline-block';
+    navUl.style.flexDirection = 'column';
+    navUl.style.position = 'fixed';
+    navUl.style.top = '64px';
+    navUl.style.right = '6vw';
+    navUl.style.background = '#1A1410';
+    navUl.style.border = '1px solid rgba(245,239,230,0.16)';
+    navUl.style.padding = '1.4rem 1.8rem';
+    navUl.style.gap = '1.2rem';
+  });
+</script>
+
+</body>
+</html>
